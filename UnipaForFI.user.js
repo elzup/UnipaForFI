@@ -51,7 +51,7 @@
         count: 0,
         list: ['情報セキュリティの基礎と暗号技術',
           'ネットワークプログラミング',
-          'ネットワークプログラミング演習','情報ネットワーク']
+          'ネットワークプログラミング演習','情報ネットワーク','映像表現演習']
       },
       sn: {
         now: 0,
@@ -84,8 +84,6 @@
           if(unitList[i] == myUnitText){
             // 取得済み単位
             if(hyoka.indexOf(myHyokaText) >= 0){
-              console.log(hyoka.indexOf(myHyokaText));
-              console.log(myHyokaText);
               var n = taniList[i].textContent;
               units[unitKey]["complete"] += parseInt(n);
               // 履修中の単位
@@ -103,12 +101,12 @@
       var unitList = unit["list"];
       var unitComplete = unit["complete"];
       var unitNow = unit["now"];
+      var c = unit["count"] = unitComplete + unitNow;
       console.log(unitList);
-      console.log(unitComplete);
-      console.log(unitNow);
+      console.log("履修済み" + unitComplete);
+      console.log("履修中" + unitNow);
+      console.log("合計" + c);
     }
-
-
 
     // 要素の追加
     var table = $("table.outline tbody")[0];
@@ -131,30 +129,66 @@
     </tr>\
     <tr>\
     <th class='headTaniShutoku'>履修済単位</th>\
-    <td class='dataTaniShutokuKamoku'>CG</th>\
-    <td class='dataTaniShutokuKamoku'>VS</th>\
-    <td class='dataTaniShutokuKamoku'>MI</th>\
-    <td class='dataTaniShutokuKamoku'>WI</th>\
-    <td class='dataTaniShutokuKamoku'>ST</th>\
-    <td class='dataTaniShutokuKamoku'>SN</th>\
+    <td class='dataTaniShutokuKamoku'>"
+    + units.cg.complete
+    + "</th>\
+    <td class='dataTaniShutokuKamoku'>"
+    + units.vs.complete
+    + "</th>\
+    <td class='dataTaniShutokuKamoku'>"
+    + units.mi.complete
+    + "</th>\
+    <td class='dataTaniShutokuKamoku'>"
+    + units.wi.complete
+    + "</th>\
+    <td class='dataTaniShutokuKamoku'>"
+    + units.st.complete
+    + "</th>\
+    <td class='dataTaniShutokuKamoku'>"
+    + units.sn.complete
+    + "</th>\
     </tr>\
     <tr>\
     <th class='headTaniShutoku'>履修中単位</th>\
-    <td class='dataTaniShutokuKamoku'>CG</th>\
-    <td class='dataTaniShutokuKamoku'>VS</th>\
-    <td class='dataTaniShutokuKamoku'>MI</th>\
-    <td class='dataTaniShutokuKamoku'>WI</th>\
-    <td class='dataTaniShutokuKamoku'>ST</th>\
-    <td class='dataTaniShutokuKamoku'>SN</th>\
+    <td class='dataTaniShutokuKamoku'>"
+    + units.cg.now
+    + "</th>\
+    <td class='dataTaniShutokuKamoku'>"
+    + units.vs.now
+    + "</th>\
+    <td class='dataTaniShutokuKamoku'>"
+    + units.mi.now
+    + "</th>\
+    <td class='dataTaniShutokuKamoku'>"
+    + units.wi.now
+    + "</th>\
+    <td class='dataTaniShutokuKamoku'>"
+    + units.st.now
+    + "</th>\
+    <td class='dataTaniShutokuKamoku'>"
+    + units.sn.now
+    + "</th>\
     </tr>\
     <tr>\
     <th class='headTaniShutoku'>ユニット合計</th>\
-    <td class='dataTaniShutokuKamoku'>CG</th>\
-    <td class='dataTaniShutokuKamoku'>VS</th>\
-    <td class='dataTaniShutokuKamoku'>MI</th>\
-    <td class='dataTaniShutokuKamoku'>WI</th>\
-    <td class='dataTaniShutokuKamoku'>ST</th>\
-    <td class='dataTaniShutokuKamoku'>SN</th>\
+    <td class='dataTaniShutokuKamoku'>"
+    + units.cg.count
+    + "</th>\
+    <td class='dataTaniShutokuKamoku'>"
+    + units.vs.count
+    + "</th>\
+    <td class='dataTaniShutokuKamoku'>"
+    + units.mi.count
+    + "</th>\
+    <td class='dataTaniShutokuKamoku'>"
+    + units.wi.count
+    + "</th>\
+    <td class='dataTaniShutokuKamoku'>"
+    + units.st.count
+    + "</th>\
+    <td class='dataTaniShutokuKamoku'>"
+    + units.sn.count
+    + "</th>\
     </tr>\
     </tbody>\
     </table>\
@@ -164,7 +198,5 @@
     ";
     $(table).append(titleText);
     $(table).append(tableText);
-
-    console.log("ok");
 
 })(jQuery);
