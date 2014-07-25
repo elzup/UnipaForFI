@@ -196,7 +196,26 @@
     <td></td>\
     </tr>\
     ";
+
+    var last = "\
+    <tr>\
+    <td></td>\
+    <td>\
+    <ul style='list-style:none;'>\
+    <li>CG  コンピュータ・グラフィックス\
+    <li>VS  映像と音\
+    <li>MI  メディアとインタラクション\
+    <li>WI  ウェブインテリジェンス\
+    <li>SN  セキュリティとネットワーク\
+    <li>ST  ソフトウェアテクノロジ</p>\
+    </ul>\
+    </td>\
+    <td></td>\
+    </tr>\
+    "
+    var link = "<tr><td></td><td><a href='http://www.im.dendai.ac.jp/curriculum.html' target='_blank'>ユニット詳細(学科ページ)</a></td></tr>"
+
     $(table).append(titleText);
     $(table).append(tableText);
-
+    $(table).append(link);
 })(jQuery);
