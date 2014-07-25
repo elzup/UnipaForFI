@@ -77,9 +77,9 @@
           'サーバプログラミング演習',
           'ソフトウェア設計',
           '情報システム論',
-          'ソフトウェア分析・モデリング',
+          'ソフトウェア分析・モデリング'
         ]
-      },
+      }
     };
 
     // 科目を取得
@@ -99,31 +99,22 @@
           var myUnitText = myUnitList[j].textContent;
           var myHyokaText = hyokaList[j].textContent;
           if(unitList[i] == myUnitText){
+            // 単位数
+            var n = parseInt(taniList[i].textContent);
+            // 合計単位
+            units[unitKey]["count"] += n;
             // 取得済み単位
             if(hyoka.indexOf(myHyokaText) >= 0){
-              var n = taniList[i].textContent;
-              units[unitKey]["complete"] += parseFloat(n);
+              units[unitKey]["complete"] += n;
               // 履修中の単位
             }else if(myHyokaText == ""){
-              var n = taniList[i].textContent;
-              units[unitKey]["now"] += parseFloat(n);
+              units[unitKey]["count"] += n;
             }
           }
         }
       }
     }
 
-    for(var unitKey in units){
-      var unit = units[unitKey];
-      var unitList = unit["list"];
-      var unitComplete = unit["complete"];
-      var unitNow = unit["now"];
-      var c = unit["count"] = unitComplete + unitNow;
-      console.log(unitList);
-      console.log("履修済み" + unitComplete);
-      console.log("履修中" + unitNow);
-      console.log("合計" + c);
-    }
 
     // 要素の追加
     var table = $("table.outline tbody")[0];
@@ -219,4 +210,18 @@
     $(table).append(titleText);
     $(table).append(tableText);
     $(table).append(link);
+    
+    // 動作確認
+    var check = function () {
+      for(var unitKey in units){
+        var unit = units[unitKey];
+        var unitList = unit["list"];
+        var unitComplete = unit["complete"];
+        var unitNow = unit["now"];
+        console.log(unitList);
+        console.log("履修済み" + unitComplete);
+        console.log("履修中" + unitNow);
+      }
+    };
+
 })(jQuery);
