@@ -74,7 +74,6 @@
     // 単位認定可能な評価範囲
     var hyoka = ["S","A","B","C","RS","RA","RB","RC","RN"];
 
-
     for(var unitKey in units){
       var unit = units[unitKey];
       var unitList = unit["list"];
@@ -87,10 +86,12 @@
             if(hyoka.indexOf(myHyokaText) >= 0){
               console.log(hyoka.indexOf(myHyokaText));
               console.log(myHyokaText);
-              units[unitKey]["complete"] += 1;
+              var n = taniList[i].textContent;
+              units[unitKey]["complete"] += parseInt(n);
               // 履修中の単位
             }else if(myHyokaText == ""){
-              units[unitKey]["now"] += 1;
+              var n = taniList[i].textContent;
+              units[unitKey]["now"] += parseInt(n);
             }
           }
         }
