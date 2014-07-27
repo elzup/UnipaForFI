@@ -5,6 +5,7 @@
 // @include     https://portal.sa.dendai.ac.jp/up/faces/up/jg/Jga00201A.jsp
 // @include     https://portal.sa.dendai.ac.jp/up/faces/up/co/Com02501A.jsp
 // @include     https://portal.sa.dendai.ac.jp/up/faces/up/po/Poa00601A.jsp 
+// @include     https://portal.sa.dendai.ac.jp/up/faces/up/km/Kmd00201A.jsp
 // @version     1
 // @grant       none
 // ==/UserScript==
@@ -19,7 +20,8 @@
           'CGモデリングおよび演習',
           'CGレンダリングおよび演習',
           '形状処理および演習',
-          'コンピュータアニメーションおよび演習']
+          'コンピュータアニメーションおよび演習'
+        ]
       },
       vs: {
         now: 0,
@@ -31,7 +33,8 @@
           '音声・音響情報処理',
           'コンピュータ音楽作品制作演習',
           'バーチャルリアリティ',
-          '音声・音響情報処理']
+          '音声・音響情報処理'
+        ]
       },
       mi: { 
         now: 0,
@@ -114,7 +117,6 @@
         }
       }
     }
-
 
     // 要素の追加
     var table = $("table.outline tbody")[0];
