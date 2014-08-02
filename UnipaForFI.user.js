@@ -7,6 +7,7 @@
 // @include     https://portal.sa.dendai.ac.jp/up/faces/up/po/Poa00601A.jsp 
 // @include     https://portal.sa.dendai.ac.jp/up/faces/up/km/Kmd00201A.jsp
 // @include     https://portal.sa.dendai.ac.jp/up/faces/up/km/Kma00401A.jsp
+// @include     https://portal.sa.dendai.ac.jp/up/faces/up/km/Kma00203A.jsp
 // @version     1
 // @grant       none
 // ==/UserScript==
