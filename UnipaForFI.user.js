@@ -2,20 +2,21 @@
 // @name        UnipaForFI
 // @namespace   https://twitter.com/akameco
 // @description ユニットの達成状況を追加
-// @include     https://portal.sa.dendai.ac.jp/up/faces/up/jg/Jga00201A.jsp
-// @include     https://portal.sa.dendai.ac.jp/up/faces/up/co/Com02501A.jsp
-// @include     https://portal.sa.dendai.ac.jp/up/faces/up/po/Poa00601A.jsp 
-// @include     https://portal.sa.dendai.ac.jp/up/faces/up/km/Kmd00201A.jsp
-// @include     https://portal.sa.dendai.ac.jp/up/faces/up/km/Kma00401A.jsp
-// @include     https://portal.sa.dendai.ac.jp/up/faces/up/km/Kma00203A.jsp
+// @include     https://portal.sa.dendai.ac.jp/up/faces/up/*
 // @version     1
 // @grant       none
 // ==/UserScript==
 
 (function ($) {
+    // 実行ページチェック
+    var page_title = $('.titleAreaL').html();
+    if (page_title != '成績照会') {
+        console.log('skip Unit script');
+        return;
+    }
+    console.log('load Unit script');
     var units = {
       cg: {
-        now: 0,
         complete: 0,
         count: 0,
         list: [
@@ -26,7 +27,6 @@
         ]
       },
       vs: {
-        now: 0,
         complete: 0,
         count: 0,
         list: [
@@ -39,7 +39,6 @@
         ]
       },
       mi: { 
-        now: 0,
         complete: 0,
         count: 0,
         list: [
@@ -50,7 +49,6 @@
         ]
       },
       wi: {
-        now: 0,
         complete: 0,
         count: 0,
         list: [
@@ -62,7 +60,6 @@
         ]
       },
       sn: {
-        now: 0,
         complete: 0,
         count: 0,
         list: [
@@ -73,7 +70,6 @@
         ]
       },
       st: {
-        now: 0,
         complete: 0,
         count: 0,
         list: [
@@ -96,29 +92,27 @@
     // 単位認定可能な評価範囲
     var hyoka = ["S","A","B","C","RS","RA","RB","RC","RN"];
 
-    for(var unitKey in units){
+    for (var unitKey in units){
       var unit = units[unitKey];
-      var unitList = unit["list"];
-      for (var i=0; i < unitList.length; ++i) {
-        for(var j=0; j < myUnitList.size(); ++j){
-          var myUnitText = myUnitList[j].textContent;
-          var myHyokaText = hyokaList[j].textContent;
-          if(unitList[i] == myUnitText){
-            // 単位数
-            var n = parseInt(taniList[i].textContent);
-            // 合計単位
-            units[unitKey]["count"] += n;
-            // 取得済み単位
-            if(hyoka.indexOf(myHyokaText) >= 0){
-              units[unitKey]["complete"] += n;
-              // 履修中の単位
-            }else if(myHyokaText == ""){
-              units[unitKey]["count"] += n;
-            }
-          }
+      var unitList = unit.list;
+      unitSize = myUnitList.size();
+      for (var j=0; j < unitSize; ++j){
+        var myUnitText = myUnitList[j].textContent;
+        var myHyokaText = hyokaList[j].textContent;
+        var i = unitList.indexOf(myUnitText);
+        if (i != -1) {
+          // 単位数
+          var n = taniList[j].textContent ? parseInt(taniList[j].textContent) : 0;
+          // 合計単位
+          unit.count += n;
+          // 取得済み単位
+          if (hyoka.indexOf(myHyokaText) >= 0){
+            unit.complete += n;
+          } 
         }
       }
     }
+    console.log(units);
 
     // 要素の追加
     var table = $("table.outline tbody")[0];
@@ -163,22 +157,22 @@
     <tr>\
     <th class='headTaniShutoku'>履修中単位</th>\
     <td class='dataTaniShutokuKamoku'>"
-    + units.cg.now
+    + (units.cg.count - units.cg.complete)
     + "</th>\
     <td class='dataTaniShutokuKamoku'>"
-    + units.vs.now
+    + (units.vs.count - units.vs.complete)
     + "</th>\
     <td class='dataTaniShutokuKamoku'>"
-    + units.mi.now
+    + (units.mi.count - units.mi.complete)
     + "</th>\
     <td class='dataTaniShutokuKamoku'>"
-    + units.wi.now
+    + (units.wi.count - units.wi.complete)
     + "</th>\
     <td class='dataTaniShutokuKamoku'>"
-    + units.st.now
+    + (units.st.count - units.st.complete)
     + "</th>\
     <td class='dataTaniShutokuKamoku'>"
-    + units.sn.now
+    + (units.sn.count - units.sn.complete)
     + "</th>\
     </tr>\
     <tr>\
